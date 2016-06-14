@@ -16,7 +16,8 @@ RSSFILE= "rss.txt"
     # hash download file if path empty and create md5 hash
     # if path defined - create md5 hash
 #TODO! Add tests for function and objects    
-#TODO Add loging and try statements    
+#TODO Add loging and try statements
+#TODO function get_gifs only get gifs from xml, get xml from ulr another function.     
 
 def get_gifs(rss_link):
     links = []
@@ -25,11 +26,13 @@ def get_gifs(rss_link):
     root = ET.fromstring(rss_xml)
     for child in root[0]:
         if child.tag == 'item':
-            tree = html.fromstring(child.find('description').text)
-            images = tree.xpath("//img/@src")
-            for i in images:
-                if i[-4:] == FILEFORMAT:
-                    links.append(i)
+            description = child.find('description')
+            if description != None:
+                tree = html.fromstring(description.text)
+                images = tree.xpath("//img/@src")
+                for i in images:
+                    if i[-4:] == FILEFORMAT:
+                        links.append(i)
     print(links)
 
 if __name__ == "__main__":
