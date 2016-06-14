@@ -22,6 +22,7 @@ RSSFILE= "rss.txt"
 def get_rss_xml(rss_url):
     # Get xml from url
     
+    #TODO Add try catch return errors 
     rss_xml = urllib.request.urlopen(rss_url).read()
     return ET.fromstring(rss_xml)   
 
@@ -44,6 +45,7 @@ if __name__ == "__main__":
     with open(RSSFILE) as rss_file:
         for url in rss_file:
             rss = get_rss_xml(url)
+            #TODO add error handler if function return error
             get_gifs(rss)
             print("sleep one second")
             time.sleep(1)
