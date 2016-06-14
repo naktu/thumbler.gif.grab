@@ -15,7 +15,8 @@ RSSFILE= "rss.txt"
     # get get file in needed path
     # hash download file if path empty and create md5 hash
     # if path defined - create md5 hash
-#TODO! Add tests for function and objects       
+#TODO! Add tests for function and objects    
+#TODO Add loging and try statements    
 
 def get_gifs(rss_link):
     links = []
