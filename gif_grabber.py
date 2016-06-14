@@ -3,8 +3,10 @@
 import urllib.request
 import xml.etree.ElementTree as ET
 from lxml import html
+import time
 
 FILEFORMAT = ".gif"
+RSSFILE= "rss.txt"
 
 #TODO Get gif liks - function return object GIF
 #TODO Gif object:
@@ -15,9 +17,10 @@ FILEFORMAT = ".gif"
     # if path defined - create md5 hash
 #TODO! Add tests for function and objects       
 
-def get_gifs():
+def get_gifs(rss_link):
     links = []
-    rss_xml = urllib.request.urlopen('http://ettoh.tumblr.com/rss').read()
+    print(rss_link)
+    rss_xml = urllib.request.urlopen(rss_link).read()
     root = ET.fromstring(rss_xml)
     for child in root[0]:
         if child.tag == 'item':
@@ -29,4 +32,8 @@ def get_gifs():
     print(links)
 
 if __name__ == "__main__":
-    get_gifs()
+    with open(RSSFILE) as rss_file:
+        for link in rss_file:
+            get_gifs(link)
+            print("sleep one second")
+            time.sleep(1)
