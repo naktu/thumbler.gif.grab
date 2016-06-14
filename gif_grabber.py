@@ -17,13 +17,17 @@ RSSFILE= "rss.txt"
     # if path defined - create md5 hash
 #TODO! Add tests for function and objects    
 #TODO Add loging and try statements
-#TODO function get_gifs only get gifs from xml, get xml from ulr another function.     
+    
 
-def get_rss_xml(rss_link):
-    rss_xml = urllib.request.urlopen(rss_link).read()
+def get_rss_xml(rss_url):
+    # Get xml from url
+    
+    rss_xml = urllib.request.urlopen(rss_url).read()
     return ET.fromstring(rss_xml)   
 
 def get_gifs(rss):
+    # Get gifs link from xml
+
     links = []
     for child in rss[0]:
         if child.tag == 'item':
@@ -38,8 +42,8 @@ def get_gifs(rss):
 
 if __name__ == "__main__":
     with open(RSSFILE) as rss_file:
-        for link in rss_file:
-            rss = get_rss_xml(link)
+        for url in rss_file:
+            rss = get_rss_xml(url)
             get_gifs(rss)
             print("sleep one second")
             time.sleep(1)
