@@ -19,12 +19,13 @@ RSSFILE= "rss.txt"
 #TODO Add loging and try statements
 #TODO function get_gifs only get gifs from xml, get xml from ulr another function.     
 
-def get_gifs(rss_link):
-    links = []
-    print(rss_link)
+def get_rss_xml(rss_link):
     rss_xml = urllib.request.urlopen(rss_link).read()
-    root = ET.fromstring(rss_xml)
-    for child in root[0]:
+    return ET.fromstring(rss_xml)   
+
+def get_gifs(rss):
+    links = []
+    for child in rss[0]:
         if child.tag == 'item':
             description = child.find('description')
             if description != None:
@@ -38,6 +39,7 @@ def get_gifs(rss_link):
 if __name__ == "__main__":
     with open(RSSFILE) as rss_file:
         for link in rss_file:
-            get_gifs(link)
+            rss = get_rss_xml(link)
+            get_gifs(rss)
             print("sleep one second")
             time.sleep(1)
