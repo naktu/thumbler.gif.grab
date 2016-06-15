@@ -3,6 +3,7 @@
 import unittest
 from gif_grabber import *
 import xml.etree.ElementTree as ET
+import urllib.request
 
 class TestGetRssXml(unittest.TestCase):
     def setUp(self):
@@ -14,7 +15,6 @@ class TestGetRssXml(unittest.TestCase):
         self.assertEqual(ET.Element, type(get_rss_xml(self.valid_url)))
     
     def test_url_unvaliable(self):
-        #TODO check with no_exist_url
         pass
 
     def test_no_rss_url(self):
