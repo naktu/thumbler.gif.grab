@@ -18,3 +18,6 @@ class TestGetRssXml(unittest.TestCase):
     def test_no_rss_url(self):
         #TODO check if url no rss
         pass
+
+if __name__ == "__main__":
+    unittest.main()
