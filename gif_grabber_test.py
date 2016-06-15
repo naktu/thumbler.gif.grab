@@ -1,15 +1,17 @@
 #!/usr/bin/env python3
+
 import unittest
-import gif_grabber
+from gif_grabber import *
+import xml.etree.ElementTree as ET
 
 class TestGetRssXml(unittest.TestCase):
-    def setUP(self):
-        valid_url    = "http://animesquads.tumblr.com/rss"
-        no_exist_url = "http://animesquads.dtumblr.com/rss"
+    def setUp(self):
+        self.valid_url    = "http://animesquads.tumblr.com/rss"
+        self.no_exist_url = "http://animesquads.sdfsdfsdf12=.com/rss"
+        self.no_rss_url   = "http://animesquads.tumblr.com"
 
     def test_valid_rss_url(self):
-        #TODO check valid url
-        pass
+        self.assertEqual(ET.Element, type(get_rss_xml(self.valid_url)))
     
     def test_url_unvaliable(self):
         #TODO check with no_exist_url
