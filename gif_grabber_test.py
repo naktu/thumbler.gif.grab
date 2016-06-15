@@ -18,8 +18,7 @@ class TestGetRssXml(unittest.TestCase):
         pass
 
     def test_no_rss_url(self):
-        #TODO check if url no rss
-        pass
+        self.assertRaises(ET.ParseError, get_rss_xml(self.no_rss_url))
 
 if __name__ == "__main__":
     unittest.main()
