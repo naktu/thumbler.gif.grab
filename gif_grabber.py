@@ -42,11 +42,15 @@ def get_gifs(rss):
     print(links)
 
 if __name__ == "__main__":
-    with open(RSSFILE) as rss_file:
-        for url in rss_file:
-            rss = get_rss_xml(url)
-            #TODO add error handler if function return error
-            #TODO create function with check return of get_gifs answer
-            get_gifs(rss)
-            print("sleep one second")
-            time.sleep(1)
+    try:
+        with open(RSSFILE) as rss_file:
+            for url in rss_file:
+                rss = get_rss_xml(url)
+                #TODO add error handler if function return error
+                #TODO create function with check return of get_gifs answer
+                get_gifs(rss)
+                print("sleep one second")
+                time.sleep(1)
+    except:
+        print("ERROR cannot open the file %s" % RSSFILE)
+        exit(1)
