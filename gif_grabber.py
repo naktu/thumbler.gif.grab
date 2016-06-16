@@ -46,6 +46,7 @@ if __name__ == "__main__":
         for url in rss_file:
             rss = get_rss_xml(url)
             #TODO add error handler if function return error
+            #TODO create function with check return of get_gifs answer
             get_gifs(rss)
             print("sleep one second")
             time.sleep(1)
