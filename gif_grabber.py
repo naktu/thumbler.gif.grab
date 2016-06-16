@@ -5,8 +5,10 @@ import xml.etree.ElementTree as ET
 from lxml import html
 import time
 
-FILEFORMAT = ".gif"
-RSSFILE= "rss.txt"
+#Configuration
+FILEFORMAT = ".gif" #checked file format
+RSSFILE= "rss.txt"  #file with rss urls"
+TIMEOUT = 10        #timeout second before check new url
 
 #TODO Get gif liks - function return object GIF
 #TODO Gif object:
@@ -45,12 +47,16 @@ if __name__ == "__main__":
     try:
         with open(RSSFILE) as rss_file:
             for url in rss_file:
-                rss = get_rss_xml(url)
-                #TODO add error handler if function return error
-                #TODO create function with check return of get_gifs answer
-                get_gifs(rss)
-                print("sleep one second")
-                time.sleep(1)
+                try:
+                    rss = get_rss_xml(url)
+                    get_gifs(rss)
+                    print("sleep one second")
+                    time.sleep(1)
+                except:
+                    print("Error: work url %s" %url)
+                
+            #TODO create function with check return of get_gifs answer
+
     except:
         print("ERROR cannot open the file %s" % RSSFILE)
         exit(1)
