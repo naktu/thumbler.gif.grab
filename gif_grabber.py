@@ -5,28 +5,29 @@ import xml.etree.ElementTree as ET
 from lxml import html
 import time
 
-#Configuration
-FILEFORMAT = ".gif" #checked file format
-RSSFILE= "rss.txt"  #file with rss urls"
-TIMEOUT = 10        #timeout second before check new url
+# Configuration
+FILEFORMAT = ".gif"     # checked file format
+RSSFILE = "rss.txt"      # file with rss urls"
+TIMEOUT = 10            # timeout second before check new url
 
-#TODO Get gif liks - function return object GIF
-#TODO Gif object:
-    # Have attr: link, path, 
-    # Have methods: get, hash
-    # get get file in needed path
-    # hash download file if path empty and create md5 hash
-    # if path defined - create md5 hash
-#TODO! Add tests for function and objects    
-#TODO Add loging and try statements
-    
+# TODO Get gif liks - function return object GIF
+# TODO Gif object:
+#   Have attr: link, path
+#   Have methods: get, hash
+#   get get file in needed path
+#   hash download file if path empty and create md5 hash
+#   if path defined - create md5 hash
+# TODO! Add tests for function and objects
+# TODO Add loging and try statements
+
 
 def get_rss_xml(rss_url):
     # Get xml from url
-    
-    #TODO Add try catch return errors 
+
+    # TODO Add try catch return errors
     rss_xml = urllib.request.urlopen(rss_url).read()
-    return ET.fromstring(rss_xml)   
+    return ET.fromstring(rss_xml)
+
 
 def get_gifs(rss):
     # Get gifs link from xml
@@ -35,7 +36,7 @@ def get_gifs(rss):
     for child in rss[0]:
         if child.tag == 'item':
             description = child.find('description')
-            if description != None:
+            if description is not None:
                 tree = html.fromstring(description.text)
                 images = tree.xpath("//img/@src")
                 for i in images:
@@ -53,9 +54,9 @@ if __name__ == "__main__":
                     print("sleep one second")
                     time.sleep(1)
                 except:
-                    print("Error: work url %s" %url)
-                
-            #TODO create function with check return of get_gifs answer
+                    print("Error: work url %s" % url)
+
+            # TODO create function with check return of get_gifs answer
 
     except:
         print("ERROR cannot open the file %s" % RSSFILE)
