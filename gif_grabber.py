@@ -9,6 +9,8 @@ import time
 FILEFORMAT = ".gif"     # checked file format
 RSSFILE = "rss.txt"      # file with rss urls"
 TIMEOUT = 10            # timeout second before check new url
+FILE_PATH = "gifs"
+HOME_DIR = "."
 
 # TODO Add loging and try statements
 
@@ -25,6 +27,9 @@ class Gif:
         #TODO if md5_hash is empty to create hash for this file
         pass
 
+    def move_file(self, file, destination):
+        #TODO move file to the new directory
+        pass
 
 def get_rss_xml(rss_url):
     # Get xml from url
