@@ -30,7 +30,7 @@ class Gif:
 
     def calculate_hash(self):
         pass
-        
+
 
 def get_rss_xml(rss_url):
     # Get xml from url
@@ -43,7 +43,7 @@ def get_rss_xml(rss_url):
 def get_gifs(rss):
     # Get gifs link from xml
 
-    links = []
+    gifs = []
     for child in rss[0]:
         if child.tag == 'item':
             description = child.find('description')
@@ -52,8 +52,10 @@ def get_gifs(rss):
                 images = tree.xpath("//img/@src")
                 for i in images:
                     if i[-4:] == FILEFORMAT:
-                        links.append(i)
-    print(links)
+                        l = Gif
+                        l.gif_url = i
+                        gifs.append(l)
+    return gifs
 
 if __name__ == "__main__":
     try:
@@ -61,7 +63,7 @@ if __name__ == "__main__":
             for url in rss_file:
                 try:
                     rss = get_rss_xml(url)
-                    get_gifs(rss)
+                    gifs = get_gifs(rss)
                     print("sleep one second")
                     time.sleep(1)
                 except:
