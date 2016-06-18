@@ -20,6 +20,17 @@ TIMEOUT = 10            # timeout second before check new url
 # TODO! Add tests for function and objects
 # TODO Add loging and try statements
 
+class Gif:
+    gif_url = ""
+    gif_path = ""
+    md5_hash = 0
+
+    def get_gif(self):
+        pass
+
+    def calculate_hash(self):
+        pass
+        
 
 def get_rss_xml(rss_url):
     # Get xml from url
