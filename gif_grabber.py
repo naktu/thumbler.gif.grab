@@ -10,14 +10,6 @@ FILEFORMAT = ".gif"     # checked file format
 RSSFILE = "rss.txt"      # file with rss urls"
 TIMEOUT = 10            # timeout second before check new url
 
-# TODO Get gif liks - function return object GIF
-# TODO Gif object:
-#   Have attr: link, path
-#   Have methods: get, hash
-#   get get file in needed path
-#   hash download file if path empty and create md5 hash
-#   if path defined - create md5 hash
-# TODO! Add tests for function and objects
 # TODO Add loging and try statements
 
 class Gif:
@@ -25,10 +17,12 @@ class Gif:
     gif_path = ""
     md5_hash = 0
 
-    def get_gif(self):
+    def get_gif(self, file_path):
+        #TODO get file to file_path
         pass
 
     def calculate_hash(self):
+        #TODO if md5_hash is empty to create hash for this file
         pass
 
 
