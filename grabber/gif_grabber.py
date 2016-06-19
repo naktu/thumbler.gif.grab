@@ -27,7 +27,7 @@ class Gif:
 
     def get_gif(self, file_path):
         file_name = naming()
-        urlib.request.urlretrieve(sel.gif_url, file_path + file_name)
+        urlib.request.urlretrieve(self.gif_url, file_path + file_name)
 
     def calculate_hash(self):
         #TODO if md5_hash is empty to create hash for this file
@@ -69,22 +69,25 @@ def get_gifs(rss):
 
 if __name__ == "__main__":
     try:
-        with open(RSSFILE) as rss_file:
+        with open(HOME_DIR + RSSFILE) as rss_file:
             for url in rss_file:
                 try:
                     rss = get_rss_xml(url)
                     gifs = get_gifs(rss)
-                    if gifs != []:
-                        for gif in gifs:
-                            gif.move
+                    #if gifs != []:
+                       #for gif in gifs:
+                    #       gif.get_gif(HOME_DIR + FILE_PATH)
+                        #print(gif.gif_url)
+                        sleep(10)
 
                     print("sleep one second")
                     time.sleep(1)
                 except:
+                    #print(sys.exc_info()[0])
                     print("Error: work url %s" % url)
 
             # TODO create function with check return of get_gifs answer
 
     except:
-        print("ERROR cannot open the file %s" % RSSFILE)
+        print("ERROR cannot open the file %s" % HOME_DIR + RSSFILE)
         exit(1)
