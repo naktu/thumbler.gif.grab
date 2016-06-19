@@ -1,18 +1,23 @@
 #!/usr/bin/env python3
 
+import os
 import unittest
-from gif_grabber import *
+#from gif_grabber import *
 import xml.etree.ElementTree as ET
 import urllib.request
 import string
 import random
+import sys
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from grabber import gif_grabber
 
 class TestGetRssXml(unittest.TestCase):
     def setUp(self):
         self.valid_url = "http://animesquads.tumblr.com/rss"
 
     def test_valid_rss_url(self):
-        self.assertEqual(ET.Element, type(get_rss_xml(self.valid_url)))
+        self.assertEqual(ET.Element, type(gif_grabber.get_rss_xml(self.valid_url)))
 
 class TestNaming(unittest.TestCase):
     def setUp(self):
