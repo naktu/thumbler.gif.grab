@@ -4,15 +4,21 @@ import urllib.request
 import xml.etree.ElementTree as ET
 from lxml import html
 import time
+import string
+import random
 
 # Configuration
 FILEFORMAT = ".gif"     # checked file format
 RSSFILE = "rss.txt"      # file with rss urls"
 TIMEOUT = 10            # timeout second before check new url
-FILE_PATH = "gifs"
-HOME_DIR = "."
+FILE_PATH = "gifs/"
+HOME_DIR = "./"
+LINEFILENAME = 16       # use for len name file
+SYMBOLS = string.ascii_uppercase + string.digits + string.ascii_uppercase.lower()
+END = len(SYMBOLS)
 
 # TODO Add loging and try statements
+# TODO Last post date/time to file
 
 class Gif:
     gif_url = ""
@@ -20,8 +26,7 @@ class Gif:
     md5_hash = 0
 
     def get_gif(self, file_path):
-        #TODO get file to file_path
-        pass
+        
 
     def calculate_hash(self):
         #TODO if md5_hash is empty to create hash for this file
@@ -38,6 +43,12 @@ def get_rss_xml(rss_url):
     rss_xml = urllib.request.urlopen(rss_url).read()
     return ET.fromstring(rss_xml)
 
+def naming():
+    #Return randomize name for file
+    file_name = ""
+    for i in range(0, FILENAMELEN, 1):
+        file_name += SYMBOLS[random.randrane(0, END, 1)]
+    return file_name
 
 def get_gifs(rss):
     # Get gifs link from xml
@@ -63,6 +74,9 @@ if __name__ == "__main__":
                 try:
                     rss = get_rss_xml(url)
                     gifs = get_gifs(rss)
+                    if gifs != []:
+                        pass
+
                     print("sleep one second")
                     time.sleep(1)
                 except:
