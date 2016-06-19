@@ -26,7 +26,7 @@ class Gif:
     md5_hash = 0
 
     def get_gif(self, file_path):
-        
+        pass
 
     def calculate_hash(self):
         #TODO if md5_hash is empty to create hash for this file
@@ -43,11 +43,11 @@ def get_rss_xml(rss_url):
     rss_xml = urllib.request.urlopen(rss_url).read()
     return ET.fromstring(rss_xml)
 
-def naming():
+def naming(file_name_len, end):
     #Return randomize name for file
     file_name = ""
-    for i in range(0, FILENAMELEN, 1):
-        file_name += SYMBOLS[random.randrane(0, END, 1)]
+    for i in range(0, file_name_len, 1):
+        file_name += SYMBOLS[random.randrange(0, end, 1)]
     return file_name
 
 def get_gifs(rss):
