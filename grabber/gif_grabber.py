@@ -32,9 +32,9 @@ class Gif:
         #TODO if md5_hash is empty to create hash for this file
         pass
 
-    def move_file(self, file, destination):
-        #TODO move file to the new directory
-        pass
+    def move_file(self,  destination):
+        file_name = naming()
+        urlib.request.urlretrieve(sel.gif_url, desitnation + file_name)
 
 def get_rss_xml(rss_url):
     # Get xml from url
