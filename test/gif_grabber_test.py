@@ -2,11 +2,7 @@
 
 import os
 import unittest
-#from gif_grabber import *
 import xml.etree.ElementTree as ET
-import urllib.request
-import string
-import random
 import sys
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -21,15 +17,14 @@ class TestGetRssXml(unittest.TestCase):
 
 class TestNaming(unittest.TestCase):
     def setUp(self):
-        self.SYMBOLS = string.ascii_uppercase + string.digits + string.ascii_uppercase.lower()
-        self.end= len(self.SYMBOLS)
+        self.end = len(gif_grabber.SYMBOLS)
         self.file_name_len = 16  
 
     def test_name_len(self) :
-        self.assertEqual(self.end, len(naming(self.file_name_len, self.end)))
+        self.assertEqual(self.file_name_len, len(gif_grabber.naming(self.file_name_len, self.end)))
 
     def test_name_type(self):
-        self.assertEqual(string, type(naming(self.file_name_len, self.end)))
+        self.assertEqual(str, type(gif_grabber.naming(self.file_name_len, self.end)))
 
 if __name__ == "__main__":
     unittest.main()
