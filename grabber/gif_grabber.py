@@ -26,15 +26,15 @@ class Gif:
     md5_hash = 0
 
     def get_gif(self, file_path):
-        pass
+        file_name = naming()
+        urlib.request.urlretrieve(sel.gif_url, file_path + file_name)
 
     def calculate_hash(self):
         #TODO if md5_hash is empty to create hash for this file
         pass
 
-    def move_file(self,  destination):
-        file_name = naming()
-        urlib.request.urlretrieve(sel.gif_url, desitnation + file_name)
+    def move_file(self, filename, destination):
+        pass
 
 def get_rss_xml(rss_url):
     # Get xml from url
@@ -75,7 +75,8 @@ if __name__ == "__main__":
                     rss = get_rss_xml(url)
                     gifs = get_gifs(rss)
                     if gifs != []:
-                        pass
+                        for gif in gifs:
+                            gif.move
 
                     print("sleep one second")
                     time.sleep(1)
