@@ -21,9 +21,10 @@ END = len(SYMBOLS)
 # TODO Last post date/time to file
 
 class Gif:
-    gif_url = ""
-    gif_path = ""
-    md5_hash = 0
+    def __init__(self):
+        self.gif_url = ""
+        self.gif_path = ""
+        self.md5_hash = 0
 
     def get_gif(self, file_path):
         file_name = naming()
@@ -65,6 +66,7 @@ def get_gifs(rss):
                         l = Gif
                         l.gif_url = i
                         gifs.append(l)
+                        print(i)
     return gifs
 
 if __name__ == "__main__":
@@ -74,11 +76,10 @@ if __name__ == "__main__":
                 try:
                     rss = get_rss_xml(url)
                     gifs = get_gifs(rss)
-                    #if gifs != []:
-                       #for gif in gifs:
-                    #       gif.get_gif(HOME_DIR + FILE_PATH)
+                    for gif in gifs:
                         #print(gif.gif_url)
-                        sleep(10)
+                        #TODO inside only one link
+                        pass
 
                     print("sleep one second")
                     time.sleep(1)
