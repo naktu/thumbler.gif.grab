@@ -86,7 +86,9 @@ if __name__ == "__main__":
                 except:
                     #print(sys.exc_info()[0])
                     print("Error: work url %s" % url)
-
+            # TODO сделать так как в примере книги, про вызов ошибок, это позволит
+            #      переопределить тип ошибки самостоятельно и далее удобно будет 
+            #      тестировать
             # TODO create function with check return of get_gifs answer
 
     except:
