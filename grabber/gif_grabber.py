@@ -63,10 +63,10 @@ def get_gifs(rss):
                 images = tree.xpath("//img/@src")
                 for i in images:
                     if i[-4:] == FILEFORMAT:
-                        l = Gif
+                        l = Gif()
                         l.gif_url = i
                         gifs.append(l)
-                        print(i)
+                        #print(i)
     return gifs
 
 if __name__ == "__main__":
@@ -77,7 +77,7 @@ if __name__ == "__main__":
                     rss = get_rss_xml(url)
                     gifs = get_gifs(rss)
                     for gif in gifs:
-                        #print(gif.gif_url)
+                        print(gif.gif_url)
                         #TODO inside only one link
                         pass
 
