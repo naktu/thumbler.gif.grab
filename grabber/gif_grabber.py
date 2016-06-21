@@ -53,7 +53,6 @@ def naming(file_name_len, end):
 
 def get_gifs(rss):
     # Get gifs link from xml
-
     gifs = []
     for child in rss[0]:
         if child.tag == 'item':
