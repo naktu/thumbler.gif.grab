@@ -40,10 +40,20 @@ class Gif:
 
 def get_rss_xml(rss_url):
     # Get xml from url
-
     # TODO Add try catch return errors
-    rss_xml = urllib.request.urlopen(rss_url).read()
-    return ET.fromstring(rss_xml)
+    try:
+        rss_xml = urllib.request.urlopen(rss_url).read()
+    except:
+        # TODO logging error type
+        return({"ERROR": "url error"})
+
+    try:
+        xml  = ET.fromstring(rss_xml)
+    except:
+        # TODO logging error type
+        return({"ERROR": "xml error"})
+
+    return xml
 
 def naming(file_name_len, end):
     #Return randomize name for file
@@ -73,19 +83,15 @@ if __name__ == "__main__":
     try:
         with open(HOME_DIR + RSS_FILE) as rss_file:
             for url in rss_file:
-                try:
-                    rss = get_rss_xml(url)
+                rss = get_rss_xml(url)
+                if type(rss) is not dict:
                     gifs = get_gifs(rss)
                     for gif in gifs:
                         print(gif.gif_url)
-                        #TODO inside only one link
-                        pass
 
-                    print("sleep one second")
-                    time.sleep(1)
-                except:
-                    #print(sys.exc_info()[0])
-                    print("Error: work url %s" % url)
+                print("sleep one second")
+                time.sleep(1)
+
             # TODO сделать так как в примере книги, про вызов ошибок, это позволит
             #      переопределить тип ошибки самостоятельно и далее удобно будет 
             #      тестировать

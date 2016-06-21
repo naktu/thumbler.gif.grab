@@ -11,9 +11,17 @@ from grabber import gif_grabber
 class TestGetRssXml(unittest.TestCase):
     def setUp(self):
         self.valid_url = "http://animesquads.tumblr.com/rss"
+        self.no_rss_url = "https://google.com/"
+        self.no_valid_url = "https://123.len.file.name11"
 
     def test_valid_rss_url(self):
         self.assertEqual(ET.Element, type(gif_grabber.get_rss_xml(self.valid_url)))
+
+    def test_no_rss(self):
+        self.assertEqual("url error", gif_grabber.get_rss_xml(self.no_valid_url)["ERROR"])
+
+    def test_no_valid_url(self):
+        self.assertEqual("xml error", gif_grabber.get_rss_xml(self.no_rss_url)["ERROR"])
 
 class TestNaming(unittest.TestCase):
     def setUp(self):
