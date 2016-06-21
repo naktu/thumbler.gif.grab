@@ -8,17 +8,18 @@ import string
 import random
 
 # Configuration
-FILEFORMAT = ".gif"     # checked file format
-RSSFILE = "rss.txt"      # file with rss urls"
+FILE_FORMAT = ".gif"     # checked file format
+RSS_FILE = "rss.txt"      # file with rss urls"
 TIMEOUT = 10            # timeout second before check new url
 FILE_PATH = "gifs/"
 HOME_DIR = "./"
-LINEFILENAME = 16       # use for len name file
+LINE_FILE_NAME = 16       # use for len name file
 SYMBOLS = string.ascii_uppercase + string.digits + string.ascii_uppercase.lower()
 END = len(SYMBOLS)
 
 # TODO Add loging and try statements
 # TODO Last post date/time to file
+
 
 class Gif:
     def __init__(self):
@@ -28,7 +29,7 @@ class Gif:
 
     def get_gif(self, file_path):
         file_name = naming()
-        urlib.request.urlretrieve(self.gif_url, file_path + file_name)
+        urllib.request.urlretrieve(self.gif_url, file_path + file_name)
 
     def calculate_hash(self):
         #TODO if md5_hash is empty to create hash for this file
@@ -61,7 +62,7 @@ def get_gifs(rss):
                 tree = html.fromstring(description.text)
                 images = tree.xpath("//img/@src")
                 for i in images:
-                    if i[-4:] == FILEFORMAT:
+                    if i[-4:] == FILE_FORMAT:
                         l = Gif()
                         l.gif_url = i
                         gifs.append(l)
@@ -70,7 +71,7 @@ def get_gifs(rss):
 
 if __name__ == "__main__":
     try:
-        with open(HOME_DIR + RSSFILE) as rss_file:
+        with open(HOME_DIR + RSS_FILE) as rss_file:
             for url in rss_file:
                 try:
                     rss = get_rss_xml(url)
@@ -93,5 +94,5 @@ if __name__ == "__main__":
             # TODO create function with check return of get_gifs answer
 
     except:
-        print("ERROR cannot open the file %s" % HOME_DIR + RSSFILE)
+        print("ERROR cannot open the file %s" % HOME_DIR + RSS_FILE)
         exit(1)
