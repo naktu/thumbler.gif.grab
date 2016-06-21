@@ -86,12 +86,16 @@ if __name__ == "__main__":
                 rss = get_rss_xml(url)
                 if type(rss) is not dict:
                     gifs = get_gifs(rss)
-                    for gif in gifs:
-                        print(gif.gif_url)
+                    if gifs != []:
+                        for gif in gifs:
+                            print(gif.gif_url)
+                    else:
+                        print("no gifs link")
 
                 print("sleep one second")
                 time.sleep(1)
-
+            # TODO maybe willn't use whit and change to open file becase if error no open file
+            # it return file error
             # TODO сделать так как в примере книги, про вызов ошибок, это позволит
             #      переопределить тип ошибки самостоятельно и далее удобно будет 
             #      тестировать
