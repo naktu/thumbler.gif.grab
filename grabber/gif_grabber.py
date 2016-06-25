@@ -79,7 +79,7 @@ def get_gifs(rss):
                         #print(i)
     return gifs
 
-if __name__ == "__main__":
+def main():
     try:
         with open(HOME_DIR + RSS_FILE) as rss_file:
             for url in rss_file:
@@ -97,12 +97,16 @@ if __name__ == "__main__":
             # TODO maybe willn't use whit and change to open file becase if error no open file
             # it return file error
             # TODO сделать так как в примере книги, про вызов ошибок, это позволит
-            #      переопределить тип ошибки самостоятельно и далее удобно будет 
+            #      переопределить тип ошибки самостоятельно и далее удобно будет
             #      тестировать
-            # TODO попробовать сделать тестирование ошибок все же более грамотно, 
+            # TODO попробовать сделать тестирование ошибок все же более грамотно,
             #      см. описание на странице 24-25 книги про тестирование
             # TODO create function with check return of get_gifs answer
 
     except:
         print("ERROR cannot open the file %s" % HOME_DIR + RSS_FILE)
         exit(1)
+
+
+if __name__ == "__main__":
+    main()

@@ -23,6 +23,7 @@ class TestGetRssXml(unittest.TestCase):
     def test_no_valid_url(self):
         self.assertEqual("xml error", gif_grabber.get_rss_xml(self.no_rss_url)["ERROR"])
 
+
 class TestGetGifs(unittest.TestCase):
     def setUp(self):
         self.no_gif_rss = "https://habrahabr.ru/rss/interesting/"
