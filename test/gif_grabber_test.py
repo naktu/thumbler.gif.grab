@@ -6,6 +6,9 @@ import xml.etree.ElementTree as ET
 import sys
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
+# Configuration
+import settings
+
 from grabber import gif_grabber
 
 class TestGetRssXml(unittest.TestCase):
@@ -26,22 +29,23 @@ class TestGetRssXml(unittest.TestCase):
 
 class TestGetGifs(unittest.TestCase):
     def setUp(self):
-        self.no_gif_rss = "https://habrahabr.ru/rss/interesting/"
+        self.no_gif_rss = "https://slonnik.wordpress.com/feed/"
         self.no_gifs = gif_grabber.get_rss_xml(self.no_gif_rss)
 
     def test_empty_gif(self):
-        self.assertEqual([], gif_grabber.get_gifs(self.no_gifs))
+        self.assertEqual([], gif_grabber.get_gifs(self.no_gifs, settings.FILE_FORMAT))
 
 class TestNaming(unittest.TestCase):
     def setUp(self):
-        self.end = len(gif_grabber.SYMBOLS)
+        self.symbols = settings.SYMBOLS
+        self.end = len(self.symbols)
         self.file_name_len = 16  
 
     def test_name_len(self) :
-        self.assertEqual(self.file_name_len, len(gif_grabber.naming(self.file_name_len, self.end)))
+        self.assertEqual(self.file_name_len, len(gif_grabber.naming(self.file_name_len, self.end, self.symbols)))
 
     def test_name_type(self):
-        self.assertEqual(str, type(gif_grabber.naming(self.file_name_len, self.end)))
+        self.assertEqual(str, type(gif_grabber.naming(self.file_name_len, self.end, self.symbols)))
 
 class TestMain(unittest.TestCase):
     def setUp(self):
