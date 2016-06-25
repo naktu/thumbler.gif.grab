@@ -47,14 +47,14 @@ def get_rss_xml(rss_url):
 
     return xml
 
-def naming(file_name_len, end):
+def naming(file_name_len, end, symbols):
     #Return randomize name for file
     file_name = ""
     for i in range(0, file_name_len, 1):
-        file_name += settings.SYMBOLS[random.randrange(0, end, 1)]
+        file_name += symbols[random.randrange(0, end, 1)]
     return file_name
 
-def get_gifs(rss):
+def get_gifs(rss, file_format):
     # Get gifs link from xml
     gifs = []
     for child in rss[0]:
@@ -64,20 +64,20 @@ def get_gifs(rss):
                 tree = html.fromstring(description.text)
                 images = tree.xpath("//img/@src")
                 for i in images:
-                    if i[-4:] == settings.FILE_FORMAT:
+                    if i[-4:] == file_format:
                         l = Gif()
                         l.gif_url = i
                         gifs.append(l)
                         #print(i)
     return gifs
 
-def main():
+def main(home_dir, rss_file, file_format):
     try:
-        with open(settings.HOME_DIR + settings.RSS_FILE) as rss_file:
+        with open(home_dir + rss_file) as rss_file:
             for url in rss_file:
                 rss = get_rss_xml(url)
                 if type(rss) is not dict:
-                    gifs = get_gifs(rss)
+                    gifs = get_gifs(rss, file_format)
                     if gifs != []:
                         for gif in gifs:
                             print(gif.gif_url)
@@ -97,7 +97,7 @@ def main():
 
     except FileNotFoundError:
         # TODO add loging error
-        print("ERROR cannot open the file %s" % settings.HOME_DIR + settings.RSS_FILE)
+        print("ERROR cannot open the file %s" % home_dir + rss_file)
         exit(1)
     except:
         # TODO add loging error
@@ -106,4 +106,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    main(settings.HOME_DIR, settings.RSS_FILE, settings.FILE_FORMAT)
