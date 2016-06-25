@@ -4,18 +4,10 @@ import urllib.request
 import xml.etree.ElementTree as ET
 from lxml import html
 import time
-import string
 import random
 
 # Configuration
-FILE_FORMAT = ".gif"     # checked file format
-RSS_FILE = "rss.txt"      # file with rss urls"
-TIMEOUT = 10            # timeout second before check new url
-FILE_PATH = "gifs/"
-HOME_DIR = "./"
-LINE_FILE_NAME = 16       # use for len name file
-SYMBOLS = string.ascii_uppercase + string.digits + string.ascii_uppercase.lower()
-END = len(SYMBOLS)
+import settings
 
 # TODO Add loging and try statements
 # TODO Last post date/time to file
@@ -59,7 +51,7 @@ def naming(file_name_len, end):
     #Return randomize name for file
     file_name = ""
     for i in range(0, file_name_len, 1):
-        file_name += SYMBOLS[random.randrange(0, end, 1)]
+        file_name += settings.SYMBOLS[random.randrange(0, end, 1)]
     return file_name
 
 def get_gifs(rss):
@@ -72,7 +64,7 @@ def get_gifs(rss):
                 tree = html.fromstring(description.text)
                 images = tree.xpath("//img/@src")
                 for i in images:
-                    if i[-4:] == FILE_FORMAT:
+                    if i[-4:] == settings.FILE_FORMAT:
                         l = Gif()
                         l.gif_url = i
                         gifs.append(l)
@@ -81,7 +73,7 @@ def get_gifs(rss):
 
 def main():
     try:
-        with open(HOME_DIR + RSS_FILE) as rss_file:
+        with open(settings.HOME_DIR + settings.RSS_FILE) as rss_file:
             for url in rss_file:
                 rss = get_rss_xml(url)
                 if type(rss) is not dict:
@@ -103,8 +95,13 @@ def main():
             #      см. описание на странице 24-25 книги про тестирование
             # TODO create function with check return of get_gifs answer
 
+    except FileNotFoundError:
+        # TODO add loging error
+        print("ERROR cannot open the file %s" % settings.HOME_DIR + settings.RSS_FILE)
+        exit(1)
     except:
-        print("ERROR cannot open the file %s" % HOME_DIR + RSS_FILE)
+        # TODO add loging error
+        print("Other error")
         exit(1)
 
 

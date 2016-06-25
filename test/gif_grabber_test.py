@@ -43,5 +43,9 @@ class TestNaming(unittest.TestCase):
     def test_name_type(self):
         self.assertEqual(str, type(gif_grabber.naming(self.file_name_len, self.end)))
 
+class TestMain(unittest.TestCase):
+    def setUp(self):
+        pass
+
 if __name__ == "__main__":
     unittest.main()
