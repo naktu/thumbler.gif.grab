@@ -20,7 +20,7 @@ class Gif:
         self.md5_hash = 0
 
     def get_gif(self, file_path):
-        file_name = naming()
+        file_name = naming(16, len(settings.SYMBOLS),settings.SYMBOLS)
         urllib.request.urlretrieve(self.gif_url, file_path + file_name)
 
     def calculate_hash(self):
@@ -80,12 +80,14 @@ def main(home_dir, rss_file, file_format):
                     gifs = get_gifs(rss, file_format)
                     if gifs != []:
                         for gif in gifs:
-                            print(gif.gif_url)
+                            gif.get_gif(settings.FILE_PATH)
+                            time.sleep(15)
+
                     else:
                         print("no gifs link")
 
                 print("sleep one second")
-                time.sleep(1)
+                time.sleep(10)
             # TODO maybe willn't use whit and change to open file becase if error no open file
             # it return file error
             # TODO сделать так как в примере книги, про вызов ошибок, это позволит
