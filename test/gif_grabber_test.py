@@ -13,7 +13,7 @@ from grabber import gif_grabber
 
 class TestGetRssXml(unittest.TestCase):
     def setUp(self):
-        self.valid_url = "http://animesquads.tumblr.com/rss"
+        self.valid_url = "http://gifthumb.tutunak.com/rss.xml"
         self.no_rss_url = "https://google.com/"
         self.no_valid_url = "https://123.len.file.name11"
 
