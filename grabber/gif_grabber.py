@@ -5,13 +5,14 @@ import xml.etree.ElementTree as ET
 from lxml import html
 import time
 import random
+import logging
 
 # Configuration
 import settings
 
 # TODO Add loging and try statements
 # TODO Last post date/time to file
-
+logging.basicConfig(level=logging.INFO)
 
 class Gif:
     def __init__(self):
@@ -68,6 +69,7 @@ def get_gifs(rss, file_format):
                         l = Gif()
                         l.gif_url = i
                         gifs.append(l)
+                        logging.info("Finding gif %s" % l.gif_url)
                         #print(i)
     return gifs
 
@@ -76,6 +78,7 @@ def main(home_dir, rss_file, file_format):
         with open(home_dir + rss_file) as rss_file:
             for url in rss_file:
                 rss = get_rss_xml(url)
+                logging.info("Start rss url: %s" % url)
                 if type(rss) is not dict:
                     gifs = get_gifs(rss, file_format)
                     if gifs != []:
